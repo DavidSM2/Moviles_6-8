@@ -35,6 +35,7 @@ public class DetailActivity extends AppCompatActivity {
     Gimnasio gimnasio;
     Location actLocation;
     Address campingLocation;
+    Double distanciaGimnasio = 0.0;
 
     @SuppressLint("MissingPermission")
     @Override
@@ -42,10 +43,18 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         gimnasio = (Gimnasio) getIntent().getSerializableExtra("gimnasio");
-        TextView textLugar = findViewById(R.id.campingLugar);
-        TextView textNombre = findViewById(R.id.campingName);
-        TextView textCorreo = findViewById(R.id.campingCorreo);
-        TextView textDireccion = findViewById(R.id.campingDireccion);
+        TextView textMunicipio = findViewById(R.id.Municipio);
+        TextView textNombre = findViewById(R.id.Name);
+        TextView textCorreo = findViewById(R.id.Correo);
+        TextView textComunidadAutonoma = findViewById(R.id.ComunidadAutonoma);
+        TextView textDistancia = findViewById(R.id.Distancia);
+        TextView textDireccion = findViewById(R.id.Direccion);
+
+        textNombre.setText(gimnasio.getNombre());
+        textMunicipio.setText(gimnasio.getMunicipio() + " (" + gimnasio.getProvincia() + ")");
+        textCorreo.setText(gimnasio.getCorreo());
+        textComunidadAutonoma.setText(gimnasio.getComunidad_autonoma());
+        textDireccion.setText(gimnasio.getDireccion() + " (" + gimnasio.getCp() + ")");
 
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         LocationListener locationListener = new LocationListener() {
@@ -86,17 +95,18 @@ public class DetailActivity extends AppCompatActivity {
             Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
             if (location != null) {
                 actLocation = location;
-                calcularDistancia();
+                distanciaGimnasio = calcularDistancia();
             }
         }
 
+        textDistancia.setText(distanciaGimnasio + "Km");
 
     }
 
-    private void calcularDistancia() {
-        TextView textDistancia = findViewById(R.id.campingDistancia);
+    private double calcularDistancia() {
+        double distancia = 0;
 
-        if (actLocation != null && campingLocation != null) {
+        if (actLocation != null) {
             double longitud1 = actLocation.getLongitude();
             double longitud2 = Double.parseDouble(gimnasio.getLongitud());
             double latitud1 = actLocation.getLatitude();
@@ -109,19 +119,9 @@ public class DetailActivity extends AppCompatActivity {
                     Math.cos(Math.toRadians(latitud1)) * Math.cos(Math.toRadians(latitud2)) *
                             Math.sin(dLon / 2) * Math.sin(dLon / 2);
             double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-            double distancia = Math.round(radioTierra * c);
-
-            textDistancia.setText("Distancia al camping: " + distancia + " Km.");
+            distancia = Math.round(radioTierra * c);
         }
-        else
-            textDistancia.setText("");
-    }
 
-    /*
-    public void showWeb(View view) {
-        Uri uri = Uri.parse(camping.getWeb());
-        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-        startActivity(intent);
+        return distancia;
     }
-    */
 }

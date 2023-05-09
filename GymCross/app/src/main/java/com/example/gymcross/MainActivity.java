@@ -51,11 +51,12 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewInter
     RecyclerView recyclerView;
     EditText editTextBusqueda;
     ArrayList<Gimnasio> gimnasios;
+    ArrayList<Gimnasio> gimnasios_filter;
     Spinner spinner;
     GimnasiosAdapter adapter;
     FavDB favDB = new FavDB(this);
 
-    String[] opciones_spinner = {"Ordenar por...", "Nombre ascendente", "Nombre descendente", "Categoria"};
+    String[] opciones_spinner = {"Ordenar por...", "Nombre ascendente", "Nombre descendente"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,32 +70,58 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewInter
         spinner = findViewById(R.id.gim_spinner);
         gimnasios = new ArrayList<Gimnasio>();
         gimnasios = favDB.read_all_data();
+        setupData(gimnasios);
         ArrayAdapter<String> adapter_string = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, opciones_spinner);
         adapter_string.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter_string);
         spinner.setSelection(0);
 
-        /*
+        editTextBusqueda.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String textoBusqueda = charSequence.toString().toLowerCase();
+
+                if ("".equals(textoBusqueda)){
+                    setupData(gimnasios);
+                }
+
+                else {
+                    gimnasios_filter = new ArrayList<>();
+                    for (Gimnasio gimnasio : gimnasios) {
+                        if (gimnasio.getNombre().toLowerCase().contains(textoBusqueda.toLowerCase())) {
+                            gimnasios_filter.add(gimnasio);
+
+                        }
+                    }
+
+                    setupData(gimnasios_filter);
+                }
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 switch (parent.getItemAtPosition(position).toString()){
                     case "Nombre ascendente":
-                        Collections.sort(campings, Camping.comparadorNombreAscendente);
+                        Collections.sort(gimnasios, Gimnasio.comparadorNombreAscendente);
                         break;
                     case "Nombre descendente":
-                        Collections.sort(campings, Camping.comparadorNombreDescendente);
-                        break;
-                    case "Categoria":
-                        Collections.sort(campings, Camping.comparadorCategoria);
+                        Collections.sort(gimnasios, Gimnasio.comparadorNombreDescendente);
                         break;
                     default:
-                        httpConnector = new HTTPConnector();
-                        httpConnector.execute();
+                        gimnasios = favDB.read_all_data();
                         break;
                 }
 
-                setupData(campings);
+                setupData(gimnasios);
             }
 
             @Override
@@ -102,26 +129,12 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewInter
 
             }
         });
-        */
     }
 
-    private void setupData(ArrayList<Gimnasio> gimnasios){
-        this.gimnasios = gimnasios;
-        adapter = new GimnasiosAdapter(gimnasios, getApplicationContext(),this);
+    private void setupData(ArrayList<Gimnasio> _gimnasios){
+        adapter = new GimnasiosAdapter(_gimnasios, getApplicationContext(),this);
         recyclerView.setAdapter(adapter);
     }
-    /*
-    public void Ordernar_Descendente(View view) {
-        campings_filter = new ArrayList<>();
-        Collections.sort(campings, Camping.comparadorNombreDescendente);
-        setupData(campings);
-    }
-    public void Ordernar_Ascendente(View view) {
-        campings_filter = new ArrayList<>();
-        Collections.sort(campings, Camping.comparadorNombreAscendente);
-        setupData(campings);
-    }
-    */
 
     @Override
     public void onItemClick(int position) {
