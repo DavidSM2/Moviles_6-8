@@ -56,6 +56,8 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewInter
     GimnasiosAdapter adapter;
     FavDB favDB = new FavDB(this);
 
+    FloatingActionButton reminderButton;
+
     String[] opciones_spinner = {"Ordenar por...", "Nombre ascendente", "Nombre descendente"};
 
     @Override
@@ -70,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewInter
         spinner = findViewById(R.id.gim_spinner);
         gimnasios = new ArrayList<Gimnasio>();
         gimnasios = favDB.read_all_data();
+        reminderButton = findViewById(R.id.buttonFloating);
         setupData(gimnasios);
         ArrayAdapter<String> adapter_string = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, opciones_spinner);
         adapter_string.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -103,6 +106,14 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewInter
             }
             @Override
             public void afterTextChanged(Editable editable) {
+            }
+        });
+
+        reminderButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ReminderActivity.class);
+                startActivity(intent);
             }
         });
 
