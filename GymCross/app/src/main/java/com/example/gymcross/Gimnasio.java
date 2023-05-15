@@ -1,6 +1,7 @@
 package com.example.gymcross;
 
 import java.io.Serializable;
+import java.util.Comparator;
 
 public class Gimnasio implements Serializable {
     private String id;
@@ -108,4 +109,16 @@ public class Gimnasio implements Serializable {
     }
 
     public Gimnasio(){}
+
+    public static Comparator<Gimnasio> comparadorNombreDescendente = new Comparator<Gimnasio>() {
+        public int compare(Gimnasio c1, Gimnasio c2) {
+            return c2.getNombre().compareTo(c1.getNombre());
+        }
+    };
+
+    public static Comparator<Gimnasio> comparadorNombreAscendente = new Comparator<Gimnasio>() {
+        public int compare(Gimnasio c1, Gimnasio c2) {
+            return c1.getNombre().compareTo(c2.getNombre());
+        }
+    };
 }

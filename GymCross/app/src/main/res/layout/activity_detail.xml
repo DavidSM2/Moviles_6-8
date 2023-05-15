@@ -8,27 +8,6 @@
     tools:context=".DetailActivity"
     android:layout_marginTop="60dp">
 
-    <androidx.appcompat.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp">
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:layout_marginLeft="40dp"
-            android:background="@drawable/google_maps"
-            android:onClick="showMap"/>
-        <ImageButton
-            android:layout_width="57dp"
-            android:layout_height="55dp"
-            android:layout_gravity="right"
-            android:layout_marginRight="40dp"
-            android:background="@drawable/sitio_web"
-            android:onClick="showWeb"/>
-    </androidx.appcompat.widget.Toolbar>
-
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -45,80 +24,52 @@
             android:textSize="110px"
             android:textAlignment="center"
             android:textColor="#1698D8"
-            android:id="@+id/campingName"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textSize="55px"
-            android:text="Categoria"
-            android:layout_marginTop="20dp"
-            android:fontFamily="casual"
-            android:textColor="#1698D8"
-            android:id="@+id/campingCategoria"
-            android:layout_toEndOf="@+id/campingName"/>
+            android:id="@+id/Name"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="casual"
             android:textSize="55px"
-            android:text="Municipio del camping (Provincia)"
+            android:text="Municipio del gimnasio (Provincia)"
             android:textColor="#1698D8"
-            android:id="@+id/campingLugar"
-            android:layout_toEndOf="@+id/campingCategoria"/>
+            android:id="@+id/Municipio"
+            android:layout_toEndOf="@+id/Name"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="casual"
             android:textSize="55px"
-            android:text="Direccion de correo del camping"
+            android:text="Direccion (CP)"
             android:textColor="#1698D8"
-            android:id="@+id/campingCorreo"
-            android:layout_toEndOf="@+id/campingLugar"/>
+            android:id="@+id/Direccion"
+            android:layout_toEndOf="@+id/Municipio"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="casual"
             android:textSize="55px"
-            android:text="Direccion del camping (CP)"
+            android:text="Direccion de correo del gimnasio"
             android:textColor="#1698D8"
-            android:id="@+id/campingDireccion"
-            android:layout_toEndOf="@+id/campingCorreo"/>
+            android:id="@+id/Correo"
+            android:layout_toEndOf="@+id/Direccion"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="casual"
             android:textSize="55px"
-            android:text="Periodo Apertura"
+            android:text="ComunidadAutonoma"
             android:textColor="#1698D8"
-            android:id="@+id/campingPeriodo"
-            android:layout_toEndOf="@+id/campingDireccion"/>
+            android:id="@+id/ComunidadAutonoma"
+            android:layout_toEndOf="@+id/Correo"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="casual"
             android:textSize="55px"
-            android:text="Plazas: 55"
+            android:text="Distancia al gimnasio"
             android:textColor="#1698D8"
-            android:id="@+id/campingPlazas"
-            android:layout_toEndOf="@+id/campingDireccion"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fontFamily="casual"
-            android:textSize="55px"
-            android:text="Distancia: No va"
-            android:textColor="#1698D8"
-            android:id="@+id/campingDistancia"
-            android:layout_toEndOf="@+id/campingDireccion"/>
+            android:id="@+id/Distancia"
+            android:layout_toEndOf="@+id/ComunidadAutonoma"/>
     </androidx.appcompat.widget.LinearLayoutCompat>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fav"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="20dp"
-        app:srcCompat="@drawable/fav_icon"
-        android:backgroundTint="@color/design_default_color_surface"/>
 
 </FrameLayout>

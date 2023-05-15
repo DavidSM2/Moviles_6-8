@@ -61,7 +61,7 @@ public class FavDB extends SQLiteOpenHelper {
 
 
 
-    private static int DB_VERSION = 1;
+    private static int DB_VERSION = 2;
     private static String DATABASE_NAME = "GymsDB";
     private static String TABLE_NAME = "GymTable";
     public static String KEY_ID = "id";
@@ -94,7 +94,7 @@ public class FavDB extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_TABLE);
-        init();
+
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -103,11 +103,9 @@ public class FavDB extends SQLiteOpenHelper {
     }
 
     public void init(){
-        if (read_all_data() == null){
-            for(Gimnasio gim : gimnasiosBase)
-            {
-                insertGimnasio(gim);
-            }
+        for(Gimnasio gim : gimnasiosBase)
+        {
+            insertGimnasio(gim);
         }
     }
 
