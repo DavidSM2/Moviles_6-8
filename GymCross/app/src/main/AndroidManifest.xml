@@ -5,7 +5,7 @@
 
     <uses-sdk
         android:minSdkVersion="30"
-        android:targetSdkVersion="30"
+        android:targetSdkVersion="33"
         tools:ignore="GradleOverrides" />
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -13,7 +13,9 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR"/>
     <uses-permission android:name="android.permission.READ_CALENDAR" />
-    <uses-permission android:name="android.permission.SET_ALARM" />
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
         android:allowBackup="true"
@@ -22,7 +24,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GymCross">
-        <receiver android:name=".ReminderBroadcastReceiver" android:exported="true"/>
+        <receiver android:name=".ReminderBroadcastReceiver" android:exported="true" />
         <activity
             android:name=".ReminderActivity"
             android:exported="true" />

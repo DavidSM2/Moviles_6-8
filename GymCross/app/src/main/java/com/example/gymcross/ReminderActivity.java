@@ -43,7 +43,8 @@ public class ReminderActivity extends AppCompatActivity {
 
         setReminderButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 createReminder();
             }
         });
@@ -70,23 +71,23 @@ public class ReminderActivity extends AppCompatActivity {
 
         String reminderText = editText.getText().toString();
 
-        NotificationHelper.programarNotificacion(ReminderActivity.this, reminderText, "", calendar.getTimeInMillis());
+        // NotificationHelper.programarNotificacion(ReminderActivity.this, reminderText, "", calendar.getTimeInMillis());
 
-        /*
+
 
         // Crear el intent para la alarma
         Intent intent = new Intent(this, ReminderBroadcastReceiver.class);
-        intent.putExtra("reminder_text", reminderText);
+        intent.putExtra("titulo", reminderText);
 
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this.getApplicationContext(), 234324243, intent, PendingIntent.FLAG_IMMUTABLE);
 
         // Obtener el sistema de alarmas del dispositivo
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
         // Configurar la alarma con el tiempo seleccionado
         alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+        //alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + (10000), pendingIntent);
 
-         */
 
         // Valores necesarios para añadir el evento al calendario
         ContentResolver cr = getContentResolver();
@@ -105,5 +106,6 @@ public class ReminderActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Error al crear el recordatorio", Toast.LENGTH_SHORT).show();
         }
+
     }
 }
