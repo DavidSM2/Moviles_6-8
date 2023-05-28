@@ -126,19 +126,6 @@ public class FavDB extends SQLiteOpenHelper {
 
         db.close();
     }
-    public void deleteGimnasio (int id) {
-        // Define 'where' part of query.
-        String selection = KEY_ID + " LIKE ?";
-        String idcast = id +"";
-        // Specify arguments in placeholder order.
-        String[] selectionArgs = {idcast};
-
-        // Issue SQL statement.
-        SQLiteDatabase db = this.getWritableDatabase();
-        int deletedRows = db.delete(TABLE_NAME, selection,selectionArgs);
-
-        db.close();
-    }
 
     public ArrayList<Gimnasio>  read_all_data () {
         ArrayList<Gimnasio> GimnasioList = new ArrayList<Gimnasio>();

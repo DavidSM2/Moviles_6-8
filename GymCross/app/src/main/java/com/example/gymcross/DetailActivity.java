@@ -34,7 +34,6 @@ import java.util.Locale;
 public class DetailActivity extends AppCompatActivity {
     Gimnasio gimnasio;
     Location actLocation;
-    Address campingLocation;
     Double distanciaGimnasio = 0.0;
 
     @SuppressLint("MissingPermission")
